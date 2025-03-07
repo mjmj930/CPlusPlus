@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<stack>
 
 // 数组
 class ArrayStru {
@@ -46,13 +47,16 @@ public:
     }
 };
 
-struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode(int x) : val(x), next(nullptr) {}
-};
+
 
 class LinkedList {
+protected:
+    struct ListNode {
+        int val;
+        ListNode* next;
+        ListNode(int x) : val(x), next(nullptr) {}
+    };
+
 private:
     ListNode* head;
     ListNode* second;
@@ -88,7 +92,51 @@ public:
     }
 };
 
+// LIFO st.top() 访问栈顶元素, st.pop() 移出栈顶元素
+class StackStru {
 
+private:
+    std::stack<int> st;
+
+public:
+    StackStru() {
+        
+    std::cout << "ACT: st.push(1)" << std::endl;
+    st.push(1);
+
+    std::cout << "ACT: st.push(2)" << std::endl; 
+    st.push(2);
+
+
+    std::cout << "ACT: st.push(3)" << std::endl; 
+    st.push(3);
+
+    std::stack<int> tempStack;
+    while(!st.empty()) {
+        // 3, 2, 1
+        tempStack.push(st.top());
+        st.pop();
+    }
+    std::cout << "stack elements: ";
+    while(!tempStack.empty()) {
+        // 1, 2, 3
+        int element = tempStack.top();
+        std::cout<< element << " ";
+        // 从栈中取回元素
+        st.push(element);
+        tempStack.pop();
+    }
+    std::cout << std::endl;
+    // 访问栈顶元素
+    std::cout<< "Access the top ele of the stack:" << st.top() <<std::endl;
+
+    st.pop();
+    std::cout << "ACT: st.pop() " << std::endl;
+
+    std::cout << "after popping of the top ele: " << st.top() << std::endl;
+    }
+
+};
 
 
 int main() {
@@ -97,7 +145,9 @@ int main() {
 
     // VectorStru VecStru;
 
-    LinkedList LikedList; 
+    // LinkedList LikedList; 
+
+    StackStru stack_stru;
 
     return 0;
 }
