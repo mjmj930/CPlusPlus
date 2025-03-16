@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<stack>
+#include<queue>
 
 // 数组
 class ArrayStru {
@@ -139,6 +140,102 @@ public:
 };
 
 
+// FIIO Queue 
+class QueueStru {
+private:
+    std::queue<int> que;
+
+public:
+    QueueStru() {
+         que.push(1);
+         std::cout << "ACT: que.push(1) / que.front() : " << que.front();
+         std::cout << " / que.back() : " << que.back() << std::endl;
+
+        que.push(2);
+        std::cout << "ACT: que.push(2) / que.front() : " << que.front();
+        std::cout << " / que.back() : " << que.back() << std::endl;
+
+        que.push(3);
+        std::cout << "ACT: que.push(3) / que.front() : " << que.front();
+        std::cout << " / que.back() : " << que.back() << std::endl;
+
+        std::cout << "FUll queue Struct Value: ";
+        int queSize = que.size();
+        for ( int i=0; i < queSize; ++i) {
+            int element = que.front();
+            std::cout << element << " ";
+            que.pop();
+            que.push(element);
+        }
+        std::cout << std::endl;
+
+        std::cout << "Queue First Element: " << que.front() << std::endl;
+        std::cout << "Queue End Element: " << que.back() << std::endl;
+
+        que.pop();
+        std::cout << "ACT: que.pop()" << " / que.front() : " << que.front();
+
+        std::cout << "After pop first elements: " << que.front() << std::endl;
+        std::cout << "After pop last elements: " << que.back() << std::endl;
+
+        std::cout << "FUll queue Struct Value: ";
+        int queSize_2 = que.size();
+        for ( int i=0; i < queSize_2; ++i) {
+            int element = que.front();
+            std::cout << element << " ";
+            que.pop();
+            que.push(element);
+        }
+        std::cout << std::endl;
+    }
+};
+
+// 二叉树
+class TreeStru {
+protected:
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+// 前序遍历二叉树
+void preOrderTravel(TreeNode* root) {
+    if(root == nullptr) return;
+    std::cout << root -> val << " ";
+    preOrderTravel(root->left);
+    preOrderTravel(root->right);
+}
+
+void destroyTree(TreeNode* root) {
+    if(root == nullptr) return;
+    destroyTree(root->left);
+    destroyTree(root->right);
+    delete root;
+}
+
+    TreeNode* root;
+
+public:
+    TreeStru() {
+        // 创建二叉树
+        root = new TreeNode(1);
+        root->left = new TreeNode(2);
+        root->right = new TreeNode(3);
+
+        // 前序遍历二叉树
+        preOrderTravel(root);
+        std::cout << std::endl;
+
+    }
+
+    ~TreeStru() {
+        destroyTree(root);
+    }
+};
+
+
 int main() {
 
     // ArrayStru arr;
@@ -147,7 +244,10 @@ int main() {
 
     // LinkedList LikedList; 
 
-    StackStru stack_stru;
+    // StackStru stack_stru;
 
+    // QueueStru queStru;
+
+    TreeStru tree_stru;
     return 0;
 }
