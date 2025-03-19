@@ -3,20 +3,24 @@
 #include <string>
 #include <algorithm>
 
-// 原函数
+
 int lengthOfLongestSubstring(std::string s) {
-    std::vector<int> m(128, 0);
-    int ans = 0;
-    int i = 0;
-    for (int j = 0; j < s.size(); j++) {
-        i = std::max(i, m[s[j]]);
-        m[s[j]] = j + 1;
-        std::cout << "j :" << j <<std::endl;
-        std::cout << "m[s[j]] :" << m[s[j]] <<std::endl;
-        ans = std::max(ans, j - i + 1);
+    std::vector<int> last_pos(128,-1);
+    int max_len = 0;
+    int left = 0;
+
+    for (int right=0; right < s.size(); ++right) {
+        char c = s[right];
+        if(last_pos[c] != -1 && last_pos[c] >= left) {
+            left = last_pos[c] + 1;
+        }
+
+        last_pos[c] = right;
+        max_len = std::max(max_len, right - left + 1);
     }
-    return ans;
+    return max_len;
 }
+
 
 // 测试函数
 void testLengthOfLongestSubstring(const std::string& s, int expected) {
